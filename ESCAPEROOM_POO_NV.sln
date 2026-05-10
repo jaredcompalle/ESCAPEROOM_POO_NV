@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37216.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESCAPEROOM_POO_NV", "ESCAPEROOM_POO_NV\ESCAPEROOM_POO_NV.csproj", "{38893679-F3E4-40F6-B425-D19F44C9A68B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38893679-F3E4-40F6-B425-D19F44C9A68B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38893679-F3E4-40F6-B425-D19F44C9A68B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38893679-F3E4-40F6-B425-D19F44C9A68B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38893679-F3E4-40F6-B425-D19F44C9A68B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F59774F-E0F5-4DE3-A4D0-C38D2921CC3A}
+	EndGlobalSection
+EndGlobal
