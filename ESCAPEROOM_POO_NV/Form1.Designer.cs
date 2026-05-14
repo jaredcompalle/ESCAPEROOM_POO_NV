@@ -34,8 +34,12 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.lblTituloJuego = new System.Windows.Forms.Label();
             this.pnlDialogo = new System.Windows.Forms.Panel();
+            this.btnOpcion3 = new System.Windows.Forms.Button();
+            this.btnOpcion2 = new System.Windows.Forms.Button();
+            this.btnOpcion1 = new System.Windows.Forms.Button();
             this.lblDialogo = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerJuego = new System.Windows.Forms.Timer(this.components);
             this.pxbOsaka = new ESCAPEROOM_POO_NV.PixelBox();
             this.pnlDialogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pxbOsaka)).BeginInit();
@@ -51,7 +55,7 @@
             this.btnJugar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnJugar.Font = new System.Drawing.Font("Dogica", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJugar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnJugar.Location = new System.Drawing.Point(259, 378);
+            this.btnJugar.Location = new System.Drawing.Point(259, 350);
             this.btnJugar.Name = "btnJugar";
             this.btnJugar.Size = new System.Drawing.Size(250, 44);
             this.btnJugar.TabIndex = 0;
@@ -72,7 +76,7 @@
             this.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfiguracion.Font = new System.Drawing.Font("Dogica", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfiguracion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnConfiguracion.Location = new System.Drawing.Point(504, 378);
+            this.btnConfiguracion.Location = new System.Drawing.Point(504, 350);
             this.btnConfiguracion.Name = "btnConfiguracion";
             this.btnConfiguracion.Size = new System.Drawing.Size(250, 44);
             this.btnConfiguracion.TabIndex = 1;
@@ -93,7 +97,7 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Dogica", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSalir.Location = new System.Drawing.Point(12, 378);
+            this.btnSalir.Location = new System.Drawing.Point(12, 350);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(250, 44);
             this.btnSalir.TabIndex = 2;
@@ -117,22 +121,85 @@
             // 
             // pnlDialogo
             // 
+            this.pnlDialogo.Controls.Add(this.btnOpcion3);
+            this.pnlDialogo.Controls.Add(this.btnOpcion2);
+            this.pnlDialogo.Controls.Add(this.btnOpcion1);
             this.pnlDialogo.Controls.Add(this.lblDialogo);
-            this.pnlDialogo.Location = new System.Drawing.Point(186, 322);
+            this.pnlDialogo.Location = new System.Drawing.Point(161, 322);
             this.pnlDialogo.Name = "pnlDialogo";
-            this.pnlDialogo.Size = new System.Drawing.Size(382, 139);
+            this.pnlDialogo.Size = new System.Drawing.Size(443, 139);
             this.pnlDialogo.TabIndex = 5;
             this.pnlDialogo.Visible = false;
             this.pnlDialogo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDialogo_Paint);
             // 
+            // btnOpcion3
+            // 
+            this.btnOpcion3.AutoSize = true;
+            this.btnOpcion3.BackColor = System.Drawing.Color.Transparent;
+            this.btnOpcion3.Enabled = false;
+            this.btnOpcion3.FlatAppearance.BorderSize = 0;
+            this.btnOpcion3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnOpcion3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnOpcion3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpcion3.Font = new System.Drawing.Font("Dogica", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpcion3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnOpcion3.Location = new System.Drawing.Point(310, 78);
+            this.btnOpcion3.Name = "btnOpcion3";
+            this.btnOpcion3.Size = new System.Drawing.Size(111, 32);
+            this.btnOpcion3.TabIndex = 7;
+            this.btnOpcion3.Text = "NA";
+            this.btnOpcion3.UseVisualStyleBackColor = false;
+            this.btnOpcion3.Visible = false;
+            this.btnOpcion3.Click += new System.EventHandler(this.btnOpcion3_Click);
+            // 
+            // btnOpcion2
+            // 
+            this.btnOpcion2.AutoSize = true;
+            this.btnOpcion2.BackColor = System.Drawing.Color.Transparent;
+            this.btnOpcion2.Enabled = false;
+            this.btnOpcion2.FlatAppearance.BorderSize = 0;
+            this.btnOpcion2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnOpcion2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnOpcion2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpcion2.Font = new System.Drawing.Font("Dogica", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpcion2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnOpcion2.Location = new System.Drawing.Point(164, 78);
+            this.btnOpcion2.Name = "btnOpcion2";
+            this.btnOpcion2.Size = new System.Drawing.Size(111, 32);
+            this.btnOpcion2.TabIndex = 6;
+            this.btnOpcion2.Text = "NA";
+            this.btnOpcion2.UseVisualStyleBackColor = false;
+            this.btnOpcion2.Visible = false;
+            this.btnOpcion2.Click += new System.EventHandler(this.btnOpcion2_Click);
+            // 
+            // btnOpcion1
+            // 
+            this.btnOpcion1.AutoSize = true;
+            this.btnOpcion1.BackColor = System.Drawing.Color.Transparent;
+            this.btnOpcion1.Enabled = false;
+            this.btnOpcion1.FlatAppearance.BorderSize = 0;
+            this.btnOpcion1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnOpcion1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnOpcion1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpcion1.Font = new System.Drawing.Font("Dogica", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpcion1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnOpcion1.Location = new System.Drawing.Point(21, 78);
+            this.btnOpcion1.Name = "btnOpcion1";
+            this.btnOpcion1.Size = new System.Drawing.Size(111, 32);
+            this.btnOpcion1.TabIndex = 8;
+            this.btnOpcion1.Text = "NA";
+            this.btnOpcion1.UseVisualStyleBackColor = false;
+            this.btnOpcion1.Visible = false;
+            this.btnOpcion1.Click += new System.EventHandler(this.btnOpcion1_Click);
+            // 
             // lblDialogo
             // 
             this.lblDialogo.Enabled = false;
-            this.lblDialogo.Font = new System.Drawing.Font("Dogica Pixel", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDialogo.Font = new System.Drawing.Font("Dogica Pixel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDialogo.ForeColor = System.Drawing.Color.White;
             this.lblDialogo.Location = new System.Drawing.Point(18, 22);
             this.lblDialogo.Name = "lblDialogo";
-            this.lblDialogo.Size = new System.Drawing.Size(344, 67);
+            this.lblDialogo.Size = new System.Drawing.Size(403, 78);
             this.lblDialogo.TabIndex = 0;
             this.lblDialogo.Text = "label1";
             this.lblDialogo.Visible = false;
@@ -141,6 +208,10 @@
             // 
             this.timer1.Interval = 40;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timerJuego
+            // 
+            this.timerJuego.Interval = 1000;
             // 
             // pxbOsaka
             // 
@@ -172,6 +243,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.pnlDialogo.ResumeLayout(false);
+            this.pnlDialogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pxbOsaka)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -188,6 +260,10 @@
         private System.Windows.Forms.Panel pnlDialogo;
         private System.Windows.Forms.Label lblDialogo;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnOpcion3;
+        private System.Windows.Forms.Button btnOpcion2;
+        private System.Windows.Forms.Button btnOpcion1;
+        private System.Windows.Forms.Timer timerJuego;
     }
 }
 

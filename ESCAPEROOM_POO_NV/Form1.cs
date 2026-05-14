@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ESCAPEROOM_POO_NV
@@ -11,13 +13,23 @@ namespace ESCAPEROOM_POO_NV
         {
             InitializeComponent();
 
+            CargarAcertijos();
+
             pnlDialogo.MouseClick += (s, e) => GestionarClickDialogo();
             lblDialogo.MouseClick += (s, e) => GestionarClickDialogo();
             pxbOsaka.MouseClick += (s, e) => GestionarClickDialogo();
         }
 
         private Queue<DialogosConImagen> secuenciaDialogos = new Queue<DialogosConImagen>();
+        List<GestorAcertijo> listaAceLogica = new List<GestorAcertijo>();
         bool interruptor = true;
+        string respuestaUsuario;
+        int Puntuacion;
+        int indiceActual;
+        int TiempoDeJuego = 60;
+        int fallos;
+        bool empezarAcertijo = true;
+        int escena = 0;
 
         #region Navegacion Mause/Teclado
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -33,13 +45,12 @@ namespace ESCAPEROOM_POO_NV
                 e.Handled = true;
                 e.SuppressKeyPress = true;
 
-                MessageBox.Show("holi");
                 if (pnlDialogo.Visible)
                 {
                     if (timer1.Enabled)
                     {
                         timer1.Stop();
-                        lblDialogo.Text = fraseActual; 
+                        lblDialogo.Text = fraseActual;
                     }
                     else
                     {
@@ -117,15 +128,15 @@ namespace ESCAPEROOM_POO_NV
         {
             if (pnlDialogo.Visible)
             {
-                if (timer1.Enabled) 
+                if (timer1.Enabled)
                 {
                     timer1.Stop();
-                    lblDialogo.Text = fraseActual; 
+                    lblDialogo.Text = fraseActual;
                     conteoLetras = fraseActual.Length;
                 }
                 else
                 {
-                    AvanzarDialogo(); 
+                    AvanzarDialogo();
                 }
             }
         }
@@ -145,35 +156,66 @@ namespace ESCAPEROOM_POO_NV
             }
         }
 
-        private void CargarEscena()
+        private void EscenaIntroduccion()
         {
             secuenciaDialogos.Clear();
-            secuenciaDialogos.Enqueue(new DialogosConImagen("....", Properties.Resources.oSAKASMILE));
-            secuenciaDialogos.Enqueue(new DialogosConImagen("Holaaa!!", Properties.Resources.OSAKATALK));
+            secuenciaDialogos.Enqueue(new DialogosConImagen("....", Properties.Resources.OSAKASMOKEGIF));
+            secuenciaDialogos.Enqueue(new DialogosConImagen("Holaaa!!", Properties.Resources.oSAKASMILE1));
             secuenciaDialogos.Enqueue(new DialogosConImagen("Alfin llega alguien, que emocion!!", Properties.Resources.OSAKATALK));
-            secuenciaDialogos.Enqueue(new DialogosConImagen("...", Properties.Resources.oSAKASMILE));
+            secuenciaDialogos.Enqueue(new DialogosConImagen("Resuelve varios acertijos rapidamente para que pueda salir de aq..", Properties.Resources.OSAKATALK));
+            secuenciaDialogos.Enqueue(new DialogosConImagen("P-p.. perdon! para que puedas salir de aqui JJaja..", Properties.Resources.OSAKATALK));
+            secuenciaDialogos.Enqueue(new DialogosConImagen("....", Properties.Resources.oSAKASMILE1));
+            secuenciaDialogos.Enqueue(new DialogosConImagen("Empiezemos...", Properties.Resources.OSAKATALK));
         }
+
+        private void SelectorDeEscena(int indiceAtual)
+        {
+            switch (indiceAtual)
+            {
+                case 0:
+                    secuenciaDialogos.Clear();
+                    secuenciaDialogos.Enqueue(new DialogosConImagen("¨Si me nombras, desaparezco.¨", Properties.Resources.OSAKATALK));
+                    secuenciaDialogos.Enqueue(new DialogosConImagen("Quien o que soy?", Properties.Resources.OSAKATALK));
+                    secuenciaDialogos.Enqueue(new DialogosConImagen("....", Properties.Resources.OSAKATALK));
+                    break;
+            }
+        }
+
         private void AvanzarDialogo()
         {
             if (secuenciaDialogos.Count > 0)
             {
-                if (secuenciaDialogos.Count > 0)
-                {
-                    DialogosConImagen faseActual = secuenciaDialogos.Dequeue();
-                    if (faseActual.Imagen != null) pxbOsaka.Image = faseActual.Imagen;
+                DialogosConImagen faseActual = secuenciaDialogos.Dequeue();
 
-                    IniciarEfectoTexto(faseActual.Texto);
-                }
-                else
-                {
-                    pnlDialogo.Visible = false;
-                }
+                if (faseActual.Imagen != null) pxbOsaka.Image = faseActual.Imagen;
+
+                IniciarEfectoTexto(faseActual.Texto);
+            }
+            else if (empezarAcertijo)
+            {
+                SelectorDeEscena(indiceActual);
+
+                empezarAcertijo = false;
+
+                AvanzarDialogo();
             }
             else
             {
-                pnlDialogo.Visible = false;
+                MostrarInterfazRespuesta();
             }
         }
+
+        private void MostrarInterfazRespuesta()
+        {
+            btnOpcion1.Visible = true;
+            btnOpcion1.Enabled = true;
+            btnOpcion2.Visible = true;
+            btnOpcion2.Enabled = true;
+            btnOpcion3.Visible = true;
+            btnOpcion3.Enabled = true;
+            AsignarRespuestas();
+        }
+
         private string fraseActual = "";
         private int conteoLetras = 0;
 
@@ -182,7 +224,7 @@ namespace ESCAPEROOM_POO_NV
             fraseActual = texto;
             conteoLetras = 0;
             lblDialogo.Text = "";
-            timer1.Start(); 
+            timer1.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -245,7 +287,7 @@ namespace ESCAPEROOM_POO_NV
         {
             DesactivarBotonesMenu();
 
-            CargarEscena();
+            EscenaIntroduccion();
 
             pnlDialogo.Visible = true;
             lblDialogo.Visible = true;
@@ -258,10 +300,8 @@ namespace ESCAPEROOM_POO_NV
 
         private void pnlDialogo_Paint(object sender, PaintEventArgs e)
         {
-            // Usamos el color Lime para mantener la estética que ya traes
             using (Pen penBlanco = new Pen(Color.White, 3))
             {
-                // Dibujamos el rectángulo principal
                 e.Graphics.DrawRectangle(penBlanco, 10, 10, pnlDialogo.Width - 20, pnlDialogo.Height - 20);
             }
         }
@@ -270,5 +310,66 @@ namespace ESCAPEROOM_POO_NV
         {
             this.KeyPreview = true;
         }
+
+       
+
+        private void CargarAcertijos()
+        {
+            //acertijo de logica
+            listaAceLogica.Add(new GestorAcertijo("Si me nombras, desaparezco. ¿Quién soy?", "silencio", "La ausencia de ruido"));
+        }
+
+        private void AsignarRespuestas()
+        {
+            switch(indiceActual)
+            {
+                case 0:
+                    btnOpcion1.Text = "Silencio";
+                    btnOpcion2.Text = "Carro";
+                    btnOpcion3.Text = "Padre";
+                    break;
+
+
+            }
+        }
+        private void VerificarAcertijo()
+        {
+            IResoluble acertijoActual = listaAceLogica[indiceActual];
+
+            if (acertijoActual.Resolver(respuestaUsuario))
+            {
+                timerJuego.Stop();
+                IPuntuacion puntuacionGanada = listaAceLogica[indiceActual];
+                Puntuacion += puntuacionGanada.GanarPuntos(TiempoDeJuego, respuestaUsuario);
+                TiempoDeJuego = 60;
+                indiceActual++;
+                empezarAcertijo = false;
+                AvanzarDialogo();
+            }
+            else
+            {
+                fallos = listaAceLogica[indiceActual].Intentos;
+            }
+        }
+        
+        private void btnOpcion1_Click(object sender, EventArgs e)
+        {
+            respuestaUsuario = btnOpcion1.Text;
+            VerificarAcertijo();
+        }
+
+        private void btnOpcion2_Click(object sender, EventArgs e)
+        {
+            respuestaUsuario = btnOpcion2.Text;
+            VerificarAcertijo();
+
+        }
+
+        private void btnOpcion3_Click(object sender, EventArgs e)
+        {
+            respuestaUsuario = btnOpcion3.Text;
+            VerificarAcertijo();
+        }
     }
 }
+
